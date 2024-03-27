@@ -1,6 +1,6 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse, unquote
-import PortalConnection  # Assuming you have a database connection module for water fountains
+import PortalConnection as PortalConnection  # Assuming you have a database connection module for water fountains
 
 hostName = "localhost"
 serverPort = 1024
