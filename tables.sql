@@ -10,6 +10,7 @@ CREATE TABLE Locations(
 );
 
 
+
 -- CREATE TABLE Fountains(
 --     idnr INT PRIMARY KEY REFERENCES Locations(idnr),
 --     name TEXT, 
