@@ -1,5 +1,7 @@
 import plotly.express as px
 import pandas as pd
+from Database.PortalConnection import *
+
 
 def getMap():
     df: pd.DataFrame = setUpData()
@@ -9,12 +11,15 @@ def getMap():
 
 def setUpData() -> pd.DataFrame:
     print("Getting data")
+
+    fetcher = PortalConnection()
+    data = fetcher.getData()
     # Just some placeholder data for now
-    data: dict = {
-    "idnr": [1, 2, 3],
-    "lon": [12.45, 12.48, 12.43],
-    "lat": [41.88, 41.89, 41.8]
-    }
+    # data: dict = {
+    # "idnr": [1, 2, 3],
+    # "lon": [12.45, 12.48, 12.43],
+    # "lat": [41.88, 41.89, 41.8]
+    # }
     return pd.DataFrame(data)
 
 def createMap(df : pd.DataFrame) -> px.scatter_mapbox:
