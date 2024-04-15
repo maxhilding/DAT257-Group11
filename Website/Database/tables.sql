@@ -18,9 +18,3 @@ CREATE TABLE Locations(
 --     lat DECIMAL(10,7) NOT NULL,  
 --     FOREIGN KEY (lon, lat) REFERENCES Locations(lon, lat)
 -- );
-
-
-
-
-
-
