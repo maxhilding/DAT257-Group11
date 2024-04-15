@@ -16,3 +16,6 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+
+# Extra
+.DS_Store
