@@ -1,7 +1,9 @@
 CREATE OR REPLACE FUNCTION assign_idnr()
 RETURNS TRIGGER AS $$
+DECLARE cnt INT;
 BEGIN
-    NEW.idnr := nextval('location_id_seq');
+    SELECT COUNT(*) INTO cnt FROM Locations;
+    NEW.idnr = cnt + 1;
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;

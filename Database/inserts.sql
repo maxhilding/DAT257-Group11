@@ -1,6 +1,6 @@
-INSERT INTO Locations VALUES (1, 12.5235, 56.1234);
-INSERT INTO Locations VALUES (2, 11.9876, 57.3456);
-INSERT INTO Locations VALUES (3, 12.7654, 55.6789);
+INSERT INTO Locations(lon, lat) VALUES (12.5235, 56.1234);
+INSERT INTO Locations(lon, lat) VALUES (11.9876, 57.3456);
+INSERT INTO Locations(lon, lat) VALUES (12.7654, 55.6789);
 
 -- Inserting data into the Fountains table, referencing the Locations table
 -- INSERT INTO Fountains (name, lon, lat) VALUES ('Fountain A', 12.3456789, 56.7890123);
