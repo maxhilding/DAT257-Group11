@@ -6,7 +6,6 @@ from Database.PortalConnection import *
 def getMap():
     df: pd.DataFrame = setUpData()
     return createMap(df)
-    #fig.show()
 
 
 def setUpData() -> pd.DataFrame:
@@ -34,3 +33,7 @@ def createMap(df : pd.DataFrame) -> px.scatter_mapbox:
     fig.update_layout(mapbox_style="open-street-map")
     fig.update_layout(margin={"r":0,"t":50, "l":0, "b":10})
     return fig
+
+if __name__ == "__main__":
+    fig = getMap()
+    fig.show()
