@@ -1,6 +1,6 @@
 import plotly.express as px
 import pandas as pd
-from Website.Database.DatabaseConnector import *
+from Database.DatabaseConnector import *
 
 
 def getMap():

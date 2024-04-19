@@ -24,7 +24,7 @@ def connectDatabase():
         host="localhost",
         dbname="postgres",
         user="postgres",
-        password="postgres")
+        password="elefantSQL")
     conn.autocommit = True
     return conn
         
