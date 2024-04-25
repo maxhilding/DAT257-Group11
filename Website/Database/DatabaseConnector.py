@@ -37,7 +37,3 @@ def getError(e):
     message = message.replace("\\n"," ")
     message = message.replace("\"","\\\"")
     return message
-
-if __name__ == "__main__":
-   p = PortalConnection()
-   print(p.getInfo())

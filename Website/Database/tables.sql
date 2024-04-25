@@ -8,19 +8,3 @@ CREATE TABLE Locations(
     PRIMARY KEY(idnr), 
     UNIQUE(lon,lat) 
 );
-
-
-
--- CREATE TABLE Fountains(
---     idnr INT PRIMARY KEY REFERENCES Locations(idnr),
---     name TEXT, 
---     lon DECIMAL(10,7) NOT NULL,
---     lat DECIMAL(10,7) NOT NULL,  
---     FOREIGN KEY (lon, lat) REFERENCES Locations(lon, lat)
--- );
-
-
-
-
-
-
