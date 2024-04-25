@@ -22,7 +22,7 @@ def createMap(df : pd.DataFrame) -> px.scatter_mapbox:
                         lon = df['lon'],
                         lat = df['lat'],
                         zoom = 1,
-                        width = 800,
+                        width = 1100,
                         height = 600,
                         mapbox_style="open-street-map")
     fig.update_layout(margin={"r":0,"t":50, "l":0, "b":10})
