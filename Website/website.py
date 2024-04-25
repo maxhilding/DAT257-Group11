@@ -30,8 +30,12 @@ def searchWithCity():
         city = request.form["cty"]
         print(city)
         coordinates = city2Coordinates(city, "Website/static/worldcities.csv")
+        lt = coordinates[0]
+        ln = coordinates[1]
+        print(ln)
+        print(lt)
         fig = getMap()
-        fig.update_layout(mapbox=dict(center=dict(lat=coordinates[0], lon=coordinates[0]), zoom=8))
+        fig.update_layout(mapbox=dict(center=dict(lat=lt, lon=ln), zoom=8))
         div = fig.to_html(full_html=False)
         return render_template("searchResult.html", div_placeholder=div)
     else:

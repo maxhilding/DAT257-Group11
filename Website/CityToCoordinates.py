@@ -7,8 +7,4 @@ def city2Coordinates(city: str, citiesFile):
         for row in rows:
             if row["city_ascii"].lower() == city.lower():
                 return (float(row["lat"]), float(row["lng"]))
-        
-if __name__ == '__main__':
-    csvFilePath = "/Website/static/worldcities.csv"
-    print(city2Coordinates("Gothenburg", csvFilePath))
 

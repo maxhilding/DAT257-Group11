@@ -18,6 +18,7 @@ def main():
             lat = coord[1]
             sql = """INSERT INTO Locations(lon, lat) VALUES (%s, %s);"""
             cur.execute(sql, (lon, lat))
+    print("API data is now in database")        
     
 def connectDatabase():
     conn = psycopg2.connect(
