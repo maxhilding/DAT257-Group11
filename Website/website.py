@@ -29,7 +29,7 @@ def searchWithCity():
     if request.method == "POST":
         city = request.form["cty"]
         print(city)
-        coordinates = city2Coordinates(city, "Website/static/worldcities.csv")
+        coordinates = city2Coordinates(city, "/Users/jakob/Documents/GitHub/DAT257-Group11/Website/static/worldcities.csv")
         lt = coordinates[0]
         ln = coordinates[1]
         print(ln)
