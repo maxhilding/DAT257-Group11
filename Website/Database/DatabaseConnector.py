@@ -21,7 +21,7 @@ class DatabaseConnector:
         cur.execute(sql)
         res = cur.fetchall()
         if res:
-            outdict = {'idnumbers':[], 'lon':[], 'lat':[]}
+            outdict = {'idnumbers':[], 'lon':[], 'lat':[], 'address':[]}
             #print(res)
             for tuplethingy in res:
                outdict['idnumbers'].append(tuplethingy[0]['idnr'])
