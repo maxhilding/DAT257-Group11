@@ -6,7 +6,9 @@ CREATE TABLE Locations(
     lon DECIMAL(10,7) NOT NULL, 
     lat DECIMAL(10,7) NOT NULL,
     address TEXT,
-
+    working BOOLEAN DEFAULT 'true',
+    
     PRIMARY KEY(idnr), 
     UNIQUE(lon,lat) 
 );
+

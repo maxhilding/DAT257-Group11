@@ -4,48 +4,51 @@ from Database.DatabaseConnector import *
 
 
 def getMap():
-    df: pd.DataFrame = setUpData()
-    return createMap(df)
+    a, b = setUpData()
+    return createMap(a, b)
 
-
-def setUpData() -> pd.DataFrame:
+def setUpData() -> (pd.DataFrame, pd.DataFrame):
     print("Getting data")
-
     fetcher = DatabaseConnector()
     data = fetcher.getData()
-    # Just some placeholder data for now
-    # data: dict = {
-    # "idnr": [1, 2, 3],
-    # "lon": [12.45, 12.48, 12.43],
-    # "lat": [41.88, 41.89, 41.8]
-    # }
-    return pd.DataFrame(data)
+    df = pd.DataFrame(data)
+    m = df['working'] == True
+    a, b = df[m], df[~m]
+    print(a)
+    print(b)
+    return a,b
 
-def createMap(df : pd.DataFrame) -> go.Figure:
+def createMap(a : pd.DataFrame, b: pd.DataFrame) -> go.Figure:
     print("Creating map")
     fig = go.Figure(go.Scattermapbox(
-        lon=df['lon'],
-        lat=df['lat'],
-        mode='markers',
-        marker=dict(
-            size=10,
-            color='blue'),
-        text=df['address'],
-
+        lon=a['lon'],
+        lat=a['lat'],
+        mode="markers",
+        marker={'size':10, 'color':'blue'},
+        text=a['address'],
+        name='Working'
     ))
 
+    fig.add_trace(go.Scattermapbox(
+        lon=b['lon'],
+        lat=b['lat'],
+        mode="markers",
+        marker={'size':10, 'color':'red'},
+        text=b['address'],
+        name='Not working'
+    ))
+
+
     fig.update_layout(
-        mapbox=dict(
-            style="open-street-map",
-            center=dict(lon=df['lon'].mean(), lat=df['lat'].mean()),
-            zoom=10
-        ),
-        width=1200,
-        height=900,
-        title='Water Fountain Map',
+        mapbox={'style':'open-street-map', 'zoom':1},
+        width=1100,
+        height=600,
         margin={"r": 0, "t": 50, "l": 0, "b": 10}
     )
-
-
-
+    
     return fig
+    
+
+if __name__ == "__main__":
+    fig = getMap()
+    fig.show()

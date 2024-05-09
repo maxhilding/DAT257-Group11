@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 {% block title %}Search With Coordinates{% endblock %}
 {% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    {% for msg in messages %}
+        <p>{{msg}}</p>
+    {% endfor %}
+{% endif %}
+{% endwith %}
+
 <form action="#" method="post">
     <p>Latitude:</p>
     <p><input type="text" name="lt"  /></p>

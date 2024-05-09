@@ -15,19 +15,21 @@ class DatabaseConnector:
         sql = """SELECT jsonb_build_object('idnr', l.idnr,
                                            'location', jsonb_build_object('lon', l.lon, 
                                                                           'lat', l.lat,
-                                                                          'address', l.address)
+                                                                          'address', l.address,
+                                                                          'working', l.working)
                                                                           ) AS location_json
                 FROM Locations AS l;"""
         cur.execute(sql)
         res = cur.fetchall()
         if res:
-            outdict = {'idnumbers':[], 'lon':[], 'lat':[], 'address':[]}
+            outdict = {'idnumbers':[], 'lon':[], 'lat':[], 'address':[], 'working': []}
             #print(res)
             for tuplethingy in res:
                outdict['idnumbers'].append(tuplethingy[0]['idnr'])
                outdict['lon'].append(tuplethingy[0]['location']['lon'])
                outdict['lat'].append(tuplethingy[0]['location']['lat'])
                outdict['address'].append(tuplethingy[0]['location']['address'])
+               outdict['working'].append(tuplethingy[0]['location']['working'])
                #idnumberlist.append(object['idnr'])
             return outdict
         else:
