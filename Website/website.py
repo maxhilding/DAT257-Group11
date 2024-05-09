@@ -24,13 +24,12 @@ def home():
 def search():
     return render_template("search.html")
 
-@app.route("/searchWithCity", methods=["POST", "GET"])
-def searchWithCity():
+
+def searchWithCityHelper(city):
     if request.method == "POST":
-        city = request.form["cty"]
         print(city)
         try:
-            coordinates = city2Coordinates(city, "/Users/jakob/Documents/GitHub/DAT257-Group11/Website/static/worldcities.csv")
+            coordinates = city2Coordinates(city, "Website/static/worldcities.csv")
             lt = coordinates[0]
             ln = coordinates[1]
             print(ln)
@@ -47,11 +46,9 @@ def searchWithCity():
 
 
 @app.route("/searchWithCoordinates", methods=["POST", "GET"])
-def searchWithCoordinates():
+def searchWithCoordinates(lt, ln):
     if request.method == "POST":
         try:
-            lt = float(request.form["lt"])
-            ln = float(request.form["ln"])
             print(lt)
             print(ln)
             fig = getMap()
@@ -63,6 +60,21 @@ def searchWithCoordinates():
             return render_template("searchWithCoordinates.html")
     else:
         return render_template("searchWithCoordinates.html")
+
+@app.route("/searchWithCity", methods=["POST", "GET"])
+def searchWithCity():
+    if request.method == "POST":
+        s = request.form["cty"]
+        if "," in s:
+            l = s.split(",")
+            lt = float(l[0])
+            ln = float(l[1])
+            return searchWithCoordinates(lt, ln)
+        else:
+            return searchWithCityHelper(s)
+    else:
+        return render_template("searchWithCity.html")
+    
 
 if __name__ == "__main__":
     app.run(debug=False)
