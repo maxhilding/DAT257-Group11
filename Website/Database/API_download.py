@@ -1,6 +1,7 @@
 import requests
 import json
 import psycopg2
+from geopy.geocoders import Nominatim
 
 def main():
 
@@ -8,7 +9,14 @@ def main():
     data_text = API.text
     data = json.loads(data_text)
     data = data["results"]
-    conn = connectDatabase()
+
+    #conn = connectDatabase()
+    geolocator = Nominatim(user_agent="my_app_name")
+    try:
+        conn = connectDatabase()
+        print("Connected successfully")
+    except (psycopg2.DatabaseError, Exception) as error:
+        print("Error connecting to the database:", error)
 
     with conn.cursor() as cur:
 
@@ -16,16 +24,18 @@ def main():
             coord = fountain["geom"]["geometry"]["coordinates"]
             lon = coord[0]
             lat = coord[1]
-            sql = """INSERT INTO Locations(lon, lat) VALUES (%s, %s);"""
-            cur.execute(sql, (lon, lat))
-    print("API data is now in database")        
+            print(lat, lon)
+            location = geolocator.reverse(f"{lat}, {lon}")
+
+            sql = """INSERT INTO Locations(lon, lat, address) VALUES (%s, %s, %s);"""
+            cur.execute(sql, (lon, lat, location.address))
     
 def connectDatabase():
     conn = psycopg2.connect(
         host="localhost",
         dbname="postgres",
         user="postgres",
-        password="elefantSQL")
+        password="postgres")
     conn.autocommit = True
     return conn
         

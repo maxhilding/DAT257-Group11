@@ -14,7 +14,8 @@ class DatabaseConnector:
         # Here's a start of the code for this part
         sql = """SELECT jsonb_build_object('idnr', l.idnr,
                                            'location', jsonb_build_object('lon', l.lon, 
-                                                                          'lat', l.lat)
+                                                                          'lat', l.lat,
+                                                                          'address', l.address)
                                                                           ) AS location_json
                 FROM Locations AS l;"""
         cur.execute(sql)
@@ -26,6 +27,7 @@ class DatabaseConnector:
                outdict['idnumbers'].append(tuplethingy[0]['idnr'])
                outdict['lon'].append(tuplethingy[0]['location']['lon'])
                outdict['lat'].append(tuplethingy[0]['location']['lat'])
+               outdict['address'].append(tuplethingy[0]['location']['address'])
                #idnumberlist.append(object['idnr'])
             return outdict
         else:
