@@ -10,7 +10,6 @@ def main():
     data = json.loads(data_text)
     data = data["results"]
 
-    #conn = connectDatabase()
     geolocator = Nominatim(user_agent="my_app_name")
     try:
         conn = connectDatabase()
@@ -24,9 +23,7 @@ def main():
             coord = fountain["geom"]["geometry"]["coordinates"]
             lon = coord[0]
             lat = coord[1]
-            print(lat, lon)
             location = geolocator.reverse(f"{lat}, {lon}")
-
             sql = """INSERT INTO Locations(lon, lat, address) VALUES (%s, %s, %s);"""
             cur.execute(sql, (lon, lat, location.address))
     
@@ -38,6 +35,7 @@ def connectDatabase():
         password="elefantSQL")
     conn.autocommit = True
     return conn
+
         
 
 if __name__ == "__main__":

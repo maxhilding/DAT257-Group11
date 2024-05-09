@@ -14,8 +14,6 @@ def setUpData() -> (pd.DataFrame, pd.DataFrame):
     df = pd.DataFrame(data)
     m = df['working'] == True
     a, b = df[m], df[~m]
-    print(a)
-    print(b)
     return a,b
 
 def createMap(a : pd.DataFrame, b: pd.DataFrame) -> go.Figure:
@@ -38,14 +36,13 @@ def createMap(a : pd.DataFrame, b: pd.DataFrame) -> go.Figure:
         name='Not working'
     ))
 
-
     fig.update_layout(
         mapbox={'style':'open-street-map', 'zoom':1},
         width=1100,
         height=600,
-        margin={"r": 0, "t": 50, "l": 0, "b": 10}
+        margin={"r": 0, "t": 50, "l": 0, "b": 10},
+        showlegend=False
     )
-    
     return fig
     
 

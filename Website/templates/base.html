@@ -2,15 +2,12 @@
 <html>
 <head>
     {% block scripts %}{% endblock %}
-    <link rel="stylesheet"  type="text/css"  href= "{{ url_for('static',filename='styles/defualt.css') }}">
+    <link rel="stylesheet"  type="text/css"  href= "{{ url_for('static',filename='styles/default.css') }}">
     <title>{% block title %}{% endblock %}</title>
 </head>
-    <h1>iFountain</h1>
     <body>
         <div class="topnav">
-            <a class="active" href="home">Home</a>
-            <a href="searchWithCity">City Search</a>
-            <a href="searchWithCoordinates">Coordinate Search</a>
+            <a class="active" href="index">FountainFinder</a>
             <a href="about">About</a>
           </div>
         {% block content %}{% endblock %}

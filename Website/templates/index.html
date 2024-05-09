@@ -2,7 +2,22 @@
 {% block scripts %}
 <script>src="https://cdn.plot.ly/plotly-latest.min.js"</script>
 {% endblock %}
-{% block title %}Home page{% endblock %}
+{% block title %}FountainFinder{% endblock %}
 {% block content %}
+
+    {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for msg in messages %}
+                    <p>{{msg}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+    <form class="searchBar" action="#" method="post">
+        <p><input type="text" placeholder="Search.." name="search"  />
+        <input type="submit" value="Submit"/>
+        </p>
+    </form>
+
 {{div_placeholder | safe}}
 {% endblock %}
