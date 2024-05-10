@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, redirect, url_for
 import plotly.express as px
 from MapCreator import getMap
 from geopy.geocoders import Nominatim
@@ -40,5 +40,9 @@ def index():
 def about():
     return render_template("about.html")
 
+@app.route("/home")
+def home():
+    return redirect(url_for("index"))
+
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)

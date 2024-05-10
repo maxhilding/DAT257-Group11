@@ -12,12 +12,13 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-
+        
     <form class="searchBar" action="#" method="post">
-        <p><input type="text" placeholder="Search.." name="search"  />
-        <input type="submit" value="Submit"/>
+        <p>
+            <input type="text" placeholder="Search.." name="search"  />
+            <input type="submit" value="Submit"/>
         </p>
     </form>
-
+    
 {{div_placeholder | safe}}
 {% endblock %}
