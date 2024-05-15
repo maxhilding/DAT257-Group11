@@ -22,14 +22,7 @@ class DatabaseConnector:
         cur.execute(sql)
         res = cur.fetchall()
         if res:
-            outdict = {'idnumbers':[], 'lon':[], 'lat':[], 'address':[], 'working': []}
-            for tuplethingy in res:
-               outdict['idnumbers'].append(tuplethingy[0]['idnr'])
-               outdict['lon'].append(tuplethingy[0]['location']['lon'])
-               outdict['lat'].append(tuplethingy[0]['location']['lat'])
-               outdict['address'].append(tuplethingy[0]['location']['address'])
-               outdict['working'].append(tuplethingy[0]['location']['working'])
-            return outdict
+            return data_helper(res)
         else:
             return """{"result":"Not found :("}"""
 
@@ -39,3 +32,14 @@ def getError(e):
     message = message.replace("\\n"," ")
     message = message.replace("\"","\\\"")
     return message
+
+
+def data_helper(res):
+    outdict = {'idnumbers':[], 'lon':[], 'lat':[], 'address':[], 'working': []}
+    for tuplethingy in res:
+        outdict['idnumbers'].append(tuplethingy[0]['idnr'])
+        outdict['lon'].append(tuplethingy[0]['location']['lon'])
+        outdict['lat'].append(tuplethingy[0]['location']['lat'])
+        outdict['address'].append(tuplethingy[0]['location']['address'])
+        outdict['working'].append(tuplethingy[0]['location']['working'])
+    return outdict
