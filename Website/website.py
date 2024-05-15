@@ -12,16 +12,6 @@ geolocator = Nominatim(user_agent="my_app_name")
 
 @app.route("/",  methods=["POST", "GET"])
 def index():
-<<<<<<< Updated upstream
-    
-    if request.method == "POST":
-        search = request.form["search"]
-        print(search)
-        try:
-            lt, ln = search_helper(search)
-=======
-    geocode = partial(geolocator.geocode, language="es")
-
     if "theme" not in session:
         session.permanent = True
         session["theme"] = "off"
@@ -35,7 +25,7 @@ def index():
             else:
                 session["theme"] = request.form["Dark Mode"]
 
->>>>>>> Stashed changes
+
             fig = getMap()
             if session["theme"] == "on":
                 fig.update_layout(mapbox={'style':'carto-darkmatter'})
@@ -47,13 +37,7 @@ def index():
             search = request.form["search"]
             print(search)
             try:
-                if "," in search:
-                    l = search.split(",")
-                    lt = float(l[0])
-                    ln = float(l[1])
-                else:
-                    lt = geocode(search).latitude
-                    ln = geocode(search).longitude
+                lt, ln = search_helper(search)
                 fig = getMap()
                 fig.update_layout(mapbox=dict(center=dict(lat=lt, lon=ln), zoom=8))
                 if "theme" in session and session["theme"] == "on":
