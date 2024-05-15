@@ -6,7 +6,7 @@ class DatabaseConnector:
         self.conn = psycopg2.connect(
             host="localhost",
             user="postgres",
-            password="elefantSQL")
+            password="postgres")
         self.conn.autocommit = True
 
     def getData(self):
