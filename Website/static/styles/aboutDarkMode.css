@@ -1,6 +1,6 @@
 body {
-    background-color: white;
-    color:black;
+    background-color: #111111;
+    color: white;
     margin: 0;
     font-family: Arial, sans-serif;
     line-height: 1.6;
@@ -33,23 +33,23 @@ body {
 
 h1 {
     text-align: center;
-    color: #333;
+    color: #dddd;
 }
 
 h2 {
     text-align: center;
-    color: #333;
+    color: #dddd;
 }
 
 p {
     margin: 0 auto;
     max-width: 800px;
     padding: 0 20px;
-    color: #666;
+    color: #a3a3a3;
 }
 
 p strong {
-    color: #000;
+    color: white;
 }
 
 ul {
@@ -59,7 +59,7 @@ ul {
 
 li {
     margin-bottom: 15px;
-    color: #666;
+    color: #a3a3a3;
 }
 
 

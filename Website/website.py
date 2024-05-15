@@ -52,7 +52,7 @@ def index():
     # Check if dark mode is on and then update map to be dark 
     if session["theme"] == "on":
         print("Dark mode on")
-        fig.update_layout(mapbox={'style':'carto-darkmatter'})
+        fig.update_layout(mapbox={'style':'carto-darkmatter'}, template="plotly_dark")
 
     if session["center"]:
         lt = session["center"][0]
@@ -66,8 +66,7 @@ def index():
     
 @app.route("/about")
 def about():
-    
-    return render_template("about.html")
+    return render_template("about.html", theme=session["theme"])
 
 @app.route("/home")
 def home():
