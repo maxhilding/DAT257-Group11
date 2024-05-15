@@ -12,60 +12,58 @@ geolocator = Nominatim(user_agent="my_app_name")
 
 @app.route("/",  methods=["POST", "GET"])
 def index():
+    # Starting session, dark mode is off by default
+    print(session)
     if "theme" not in session:
         session.permanent = True
         session["theme"] = "off"
+    if "center" not in session:
+        session["center"] = list()
 
-    
+    # Creating the map with open-street-map style and view of whole world
+    fig = getMap()
+
+    #Update Map depending on input
     if request.method == "POST":
-        if "Dark Mode" in request.form:
-            if session["theme"] == "on":
-                session["theme"] = "off"
-                print(session["theme"])
-            else:
-                session["theme"] = request.form["Dark Mode"]
+        print(request.form)
+
+        search = request.form.get("search")
+        theme = request.form.get("Dark Mode")
 
 
-            fig = getMap()
-            if session["theme"] == "on":
-                fig.update_layout(mapbox={'style':'carto-darkmatter'})
-
-            div = fig.to_html(full_html=False)
-            return render_template("index.html", div_placeholder=div, theme=session["theme"])
-        
-        elif "search" in request.form:
-            search = request.form["search"]
+         # If search is made, try to get latitude & longitude of that location and update center of map
+        if search is not None:
             print(search)
             try:
                 lt, ln = search_helper(search)
-                fig = getMap()
-                fig.update_layout(mapbox=dict(center=dict(lat=lt, lon=ln), zoom=8))
-                if "theme" in session and session["theme"] == "on":
-                    fig.update_layout(mapbox={'style':'carto-darkmatter'})
-    
-                div = fig.to_html(full_html=False)
-                return render_template("index.html", div_placeholder=div, theme=session["theme"])
+                coordinates = session["center"]
+                # Remove old search
+                coordinates.clear()
+                coordinates.extend([lt, ln])
             except:
                 flash("Try again!")
-                fig = getMap()
-                if "theme" in session and session["theme"] == "on":
-                    fig.update_layout(mapbox={'style':'carto-darkmatter'})
-                div = fig.to_html(full_html=False)
-                return render_template("index.html", div_placeholder=div, theme=session["theme"])
+        # If checkbox checked change theme
+        elif theme is not None:
+            session["theme"] = theme
         else:
-            fig = getMap()
-            if "theme" in session and session["theme"] == "on":
-                fig.update_layout(mapbox={'style':'carto-darkmatter'})
-            div = fig.to_html(full_html=False)
-            return render_template("index.html", div_placeholder=div, theme=session["theme"])
+            session["theme"] = "off"
+       
+    print(session)
+    # Check if dark mode is on and then update map to be dark 
+    if session["theme"] == "on":
+        print("Dark mode on")
+        fig.update_layout(mapbox={'style':'carto-darkmatter'})
 
-    else:
-        fig = getMap()
-        if "theme" in session and session["theme"] == "on":
-            fig.update_layout(mapbox={'style':'carto-darkmatter'})
-        div = fig.to_html(full_html=False)
-        return render_template("index.html", div_placeholder=div, theme=session["theme"])
+    if session["center"]:
+        lt = session["center"][0]
+        ln = session["center"][1]
+        fig.update_layout(mapbox=dict(center=dict(lat=lt, lon=ln), zoom=8))
+    
+    # Finally render the map
+    div = fig.to_html(full_html=False)
+    return render_template("index.html", div_placeholder=div, theme=session["theme"])
 
+    
 @app.route("/about")
 def about():
     return render_template("about.html")
