@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block scripts %}
 <script>src="https://cdn.plot.ly/plotly-latest.min.js"</script>
+    {% if theme == "on" %}
+        <link rel="stylesheet"  type="text/css"  href= "{{ url_for('static',filename='styles/darkMode.css') }}">
+    {% endif %}
 {% endblock %}
 {% block title %}FountainFinder{% endblock %}
 {% block content %}
@@ -18,13 +21,7 @@
             <input type="text" placeholder="Search.." name="search"  />
             <input type="submit" value="Submit"/>
         </p>
-    </form>
-
-    {% if theme == "on" %}
-        <p>Dark Mode: {{theme}}</p>
-        {% else %}
-        <p>Dark Mode: {{theme}}</p>
-    {% endif %}   
+    </form> 
     
     <form class="DarkModeSwitch" action="#" method="post">
         <label class="switch">

@@ -1,6 +1,6 @@
 body {
-    background-color: white;
-    color:black;
+    background-color: black;
+    color: white;
     margin: 0;
     font-family: Arial, sans-serif;
     line-height: 1.6;
@@ -30,7 +30,6 @@ body {
     background-color: #047baa;
     color: white;
     }
-
 
 /* The switch - the box around the slider */
 .switch {
