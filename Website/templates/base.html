@@ -9,6 +9,16 @@
         <div class="topnav">
             <a class="active" href="home">FountainFinder</a>
             <a href="about">About</a>
+            <form class="DarkModeSwitch" action="#" method="post">
+                <label class="switch">
+                    {% if theme == "on" %}
+                    <input type="checkbox" onChange="this.form.submit()" name="Dark Mode" checked>
+                    {% else %}
+                    <input type="checkbox" onChange="this.form.submit()" name="Dark Mode">
+                    {% endif %}
+                    <span class="slider round"></span>
+                </label> 
+            </form>
           </div>
         {% block content %}{% endblock %}
     </body>

@@ -13,7 +13,6 @@ geolocator = Nominatim(user_agent="my_app_name")
 @app.route("/",  methods=["POST", "GET"])
 def index():
     # Starting session, dark mode is off by default
-    print(session)
     if "theme" not in session:
         session.permanent = True
         session["theme"] = "off"
@@ -25,15 +24,12 @@ def index():
 
     #Update Map depending on input
     if request.method == "POST":
-        print(request.form)
-
         search = request.form.get("search")
         theme = request.form.get("Dark Mode")
 
 
          # If search is made, try to get latitude & longitude of that location and update center of map
         if search is not None:
-            print(search)
             try:
                 lt, ln = search_helper(search)
                 coordinates = session["center"]
@@ -42,16 +38,15 @@ def index():
                 coordinates.extend([lt, ln])
             except:
                 flash("Try again!")
+        
         # If checkbox checked change theme
         elif theme is not None:
             session["theme"] = theme
         else:
             session["theme"] = "off"
        
-    print(session)
     # Check if dark mode is on and then update map to be dark 
     if session["theme"] == "on":
-        print("Dark mode on")
         fig.update_layout(mapbox={'style':'carto-darkmatter'}, template="plotly_dark")
 
     if session["center"]:
@@ -64,8 +59,16 @@ def index():
     return render_template("index.html", div_placeholder=div, theme=session["theme"])
 
     
-@app.route("/about")
+@app.route("/about", methods=["POST", "GET"])
 def about():
+    if request.method == "POST":
+        theme = request.form.get("Dark Mode")
+        # If checkbox checked change theme
+        if theme is not None:
+            session["theme"] = theme
+        else:
+            session["theme"] = "off"
+
     return render_template("about.html", theme=session["theme"])
 
 @app.route("/home")

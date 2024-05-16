@@ -23,16 +23,6 @@
         </p>
     </form> 
     
-    <form class="DarkModeSwitch" action="#" method="post">
-        <label class="switch">
-            {% if theme == "on" %}
-            <input type="checkbox" onChange="this.form.submit()" name="Dark Mode" checked>
-            {% else %}
-            <input type="checkbox" onChange="this.form.submit()" name="Dark Mode">
-            {% endif %}
-            <span class="slider"></span>
-        </label> 
-    </form>
     
 {{div_placeholder | safe}}
 {% endblock %}
