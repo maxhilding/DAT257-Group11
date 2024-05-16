@@ -9,19 +9,19 @@ body {
 
 h1 {
     text-align: center;
-    color: #dddd;
+    color: #f0f0f0;
 }
 
 h2 {
     text-align: center;
-    color: #dddd;
+    color: #f0f0f0;
 }
 
 p {
     margin: 0 auto;
     max-width: 800px;
     padding: 0 20px;
-    color: #a3a3a3;
+    color: #e1e1e1;
 }
 
 p strong {
@@ -35,7 +35,7 @@ ul {
 
 li {
     margin-bottom: 15px;
-    color: #a3a3a3;
+    color: #e1e1e1;
 }
 
 
