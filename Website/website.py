@@ -6,7 +6,7 @@ from functools import partial
 from datetime import timedelta
 
 app = Flask(__name__)
-app.secret_key = "jenvjjvbhsavhcegHCJfgVFGcvajcfk"
+app.secret_key = "adhjehfbvjslbgjkfs"
 app.permanent_session_lifetime = timedelta(minutes=5)
 geolocator = Nominatim(user_agent="my_app_name")
 
@@ -32,6 +32,8 @@ def index():
         if search is not None:
             try:
                 lt, ln = search_helper(search)
+                print(lt)
+                print(ln)
                 coordinates = session["center"]
                 # Remove old search
                 coordinates.clear()
