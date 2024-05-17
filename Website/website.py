@@ -32,8 +32,6 @@ def index():
         if search is not None:
             try:
                 lt, ln = search_helper(search)
-                print(lt)
-                print(ln)
                 coordinates = session["center"]
                 # Remove old search
                 coordinates.clear()
